@@ -1,48 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { debounce } from 'lodash'
-import { IoIosArrowBack, IoIosArrowDown, IoIosArrowUp, IoIosArrowForward } from 'react-icons/io'
+import { Dropdown } from './template/dropdown'
+import { LoadingButton } from './template/loading-button'
 
-export const ArriveFilter = ({data}) => {
+export const ArriveFilter = ({ stopsList, timeList, getTripResult }) => {
 
-   // const data = [
-   //    { id: 0, label: "Istanbul, TR (AHL)" },
-   //    { id: 1, label: "Paris, FR (CDG)" }
-   // ];
+   const [from, setFrom] = useState('')
+   const [to, setTo] = useState('')
+   const [time, setTime] = useState('')
 
-   const [isOpen, setOpen] = useState(false);
-   const [items, setItem] = useState(data);
-   const [selectedItem, setSelectedItem] = useState(null);
+   const OnSubmit = () => {
+      getTripResult({ from, to, time })
+   }
 
-   const toggleDropdown = () => setOpen(!isOpen);
-
-   const handleChange = (id) => {
-      selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
-   };
-
-   const debouncedOnChange = debounce(handleChange, 0)
-
+   const getDataList = () => {
+      return stopsList.map((stations, idx) => (
+         { id: idx, label: stations.stop_name }
+      ))
+   }
+   
    return (
       <div className="arrive-filter">
-
-         <div className="dropdown-header" onClick={toggleDropdown}>
-            {selectedItem
-               ? items.find((item) => item.id == selectedItem).label
-               : "תחנת עלייה"}
-            <i className={`fa fa-chevron-right icon ${isOpen && "open"}`}>
-            <IoIosArrowForward/>
-            </i>
-         </div>
-
-         <div className={`dropdown-body ${isOpen && "open"}`}>
-            {items.map((item, idx) => (
-               <div className="dropdown-item" key={idx} onClick={(e) => debouncedOnChange(e.target.id)} id={item.id} >
-                  <span className={`dropdown-item-dot ${item.id == selectedItem && "selected"}`} >
-                     •{" "}
-                  </span> {item.label}
-               </div>
-            ))} 
-         </div>
+         <Dropdown data={getDataList()} title='תחנת עלייה' width={300} value={setFrom} />
+         <Dropdown data={getDataList()} title='תחנת ירידה' width={300} value={setTo} />
+         <Dropdown data={timeList} title='זמן' width={100} value={setTime} />
+         <div onClick={OnSubmit}><LoadingButton /></div>
       </div>
    )
 }

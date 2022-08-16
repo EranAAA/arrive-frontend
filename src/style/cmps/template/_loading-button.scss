@@ -1,0 +1,28 @@
+.loading-button {
+
+   .button {
+      background: #FFF;
+      padding: 12px 25px;
+      border: none;
+      font-size: 18px;
+      // border-radius: 6px;
+      cursor: pointer;
+      color: #262470;
+      transition: 0.3s ease all;
+      box-shadow: 1px 2px 9px 4px rgb(0 0 0 / 30%);
+      width: 100px;
+
+      &:focus {
+         outline: none;
+      }
+
+      &:hover {
+         background-color: #262470;      
+         color: #FFF;
+      }
+
+      &.clicked {
+         // background-color: lightgreen;      
+      }
+   }
+}
