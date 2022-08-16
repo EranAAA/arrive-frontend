@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Rubik-Regular;
+  overflow: hidden;
+}
+
+input {
+  font-family: Rubik-Regular;
+}
+
+button {
+  cursor: pointer;
+}
+
+ol,
+ul {
+  // list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.example-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.example-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 400ms, transform 400ms;
+}
+
+.example-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.example-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 1000ms, transform 1000ms;
+}
