@@ -1,7 +1,8 @@
 const initialState = {
    stops: [],
    routs: [],
-   stopsTime: []
+   stopsTime: [],
+   filter: {}
 }
 
 export function arriveReducer(state = initialState, action) {
@@ -12,8 +13,12 @@ export function arriveReducer(state = initialState, action) {
       case 'SET_ARRIVES':
          const stops = action.arrives[0]
          const routs = action.arrives[1]
-         const stopsTime = action.arrives[2][0]
+         const stopsTime = action.arrives[2]
          newState = { ...state, stops, routs, stopsTime }
+         break
+
+      case 'SET_FILTER':
+         newState = { ...state, filter: action.filter }
          break
 
       default:
