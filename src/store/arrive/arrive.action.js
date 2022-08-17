@@ -24,6 +24,8 @@ export function loadArrives() {
 export function loadResults(filter) {
    try {
       return async (dispatch) => {
+
+         dispatch({ type: 'SET_RESULTS', results: '' })
          const results = await arriveService.search(filter)
          console.log('Got Results')
          dispatch({ type: 'SET_RESULTS', results })
