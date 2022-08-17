@@ -2,6 +2,7 @@ import { httpService } from './http.service'
 
 export const arriveService = {
    query,
+   search,
    getById,
    save,
    remove,
@@ -13,6 +14,15 @@ async function query(filterBy = {}) {
       return await httpService.get('trip/', filterBy)
    } catch (err) {
       console.log('cant get trips!')
+      throw err
+   }
+}
+
+async function search(filterBy = {}) {
+   try {
+      return await httpService.get('trip/search', filterBy)
+   } catch (err) {
+      console.log('cant get search!')
       throw err
    }
 }

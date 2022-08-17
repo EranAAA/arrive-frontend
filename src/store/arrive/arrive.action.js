@@ -7,17 +7,30 @@ export function setArrive(arrive) {
    }
 }
 
-export function loadArrives(filter) {
+export function loadArrives() {
    try {
       return async (dispatch) => {
-         const arrives = await arriveService.query(filter)
-         const stopsTime = await utilService.getStopTimeDemo()
-         arrives.push(stopsTime)
+         const arrives = await arriveService.query()
+         // const stopsTime = await utilService.getStopTimeDemo()
+         // arrives.push(stopsTime)
          console.log('Got Arrives')
          dispatch({ type: 'SET_ARRIVES', arrives })
       }
    } catch (err) {
       console.log('cannot load arrives', err)
+   }
+}
+
+export function loadResults(filter) {
+   try {
+      return async (dispatch) => {
+         const results = await arriveService.search(filter)
+         console.log('Got Results')
+         dispatch({ type: 'SET_RESULTS', results })
+         return results
+      }
+   } catch (err) {
+      console.log('cannot load results', err)
    }
 }
 
