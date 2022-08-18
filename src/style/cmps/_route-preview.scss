@@ -24,9 +24,14 @@
       align-items: center;
       white-space: nowrap;
       flex-wrap: wrap;
-      
+
       span{
          font-weight: 600;
+      }
+
+      svg {
+         height: 30px;
+         width: 30px;
       }
    }
 
@@ -36,6 +41,13 @@
       align-items: center;
 
       .time-reamain {
+         display: flex;
+         gap: 2px;
+         color: darkgreen;
+         line-height: 21px;
+      }
+
+      .no-time-reamain {
          display: flex;
          gap: 2px;
       }
@@ -51,3 +63,5 @@
       }
    }
 }
+
+
