@@ -1,10 +1,17 @@
 .stop-time-list {
 
+   h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.5rem;
+   }
+
    .gird-conatiner {
-      display: grid;
+      // display: grid;
       margin-top: 10px;
       overflow: scroll;
-      height: 700px;
+      height: 650px;
    }
 
 }

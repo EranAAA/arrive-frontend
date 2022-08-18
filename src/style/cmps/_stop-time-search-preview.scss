@@ -1,25 +1,38 @@
 .stop-time-preview {
-   position: relative;
-
-   max-width: 800px;
    background-color: #fff;
    color: rgb(47, 47, 47);
-   border: 1px solid #e2e2e2;
    margin-bottom: 0.5rem;
-   padding-top: 1.5rem;
-   padding-bottom: 1rem;
-   padding-right: 2rem;
-   padding-left: 1rem;
-   cursor: pointer;
-   min-height: 100px;
-
+   border-radius: 5px;
+   padding: 20px 10px;
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
+   align-items: center;
    gap: 10px;
+   cursor: pointer;
+
+   &:hover {
+      background-color: aliceblue;
+   }
+
+   .stop-container {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      span {
+         font-weight: 600;
+      }
+   }
 
    .btn {
-      position: absolute;
-      left: 0;
+      &:hover {
+         border: unset !important;
+         color: lightslategray
+      }
+      svg {
+         width: 40px;
+         height: 40px;
+      }
    }
 }

@@ -2,6 +2,8 @@ import React, { useEffect, useState, createContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Accordion from 'react-bootstrap/Accordion';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
 
 import { utilService } from '../services/util.service'
 import { loadArrives, setFilter, loadResults, loadSavedRoutes, saveRoute } from '../store/arrive/arrive.action'
@@ -48,7 +50,7 @@ export const AppArrive = () => {
          <ArriveContext.Provider value={{ updateRoute }}>
             <h1>מערכת לזיהוי איחורי הרכבת</h1>
 
-            <Accordion >
+            {/* <Accordion >
                <Accordion.Item eventKey="1">
                   <Accordion.Header >חיפוש</Accordion.Header>
                   <Accordion.Body>
@@ -56,9 +58,22 @@ export const AppArrive = () => {
                      {isSearching && <StopTimeSearchList results={results} />}
                   </Accordion.Body>
                </Accordion.Item>
-            </Accordion>
+            </Accordion> */}
 
-            <RouteList routes={routes} />
+            <Tabs
+               defaultActiveKey="lines"
+               id="justify-tab-example"
+               className="mb-3"
+               // justify
+            >
+               <Tab eventKey="lines" title="קווי רכבת">
+                  <RouteList routes={routes} />
+               </Tab>
+               <Tab eventKey="search" title="חיפוש">
+                  <ArriveFilter stopsList={stops} timeList={utilService.getTimeList()} getTripResult={getTripResult} />
+                  {isSearching && <StopTimeSearchList results={results} />}
+               </Tab>
+            </Tabs>
 
          </ArriveContext.Provider>
 

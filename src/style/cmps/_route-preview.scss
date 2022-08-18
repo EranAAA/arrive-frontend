@@ -1,18 +1,51 @@
 .route-preview {
-   // max-width: 800px;
    background-color: #fff;
    color: rgb(47, 47, 47);
    border: 1px solid #e2e2e2;
    margin-bottom: 0.5rem;
    padding-top: 1.5rem;
-   padding-bottom: 1rem;
+   padding-bottom: 1.5rem;
    padding-right: 2rem;
    padding-left: 1rem;
    cursor: pointer;
-   max-height: 100px;
-
+   border-radius: 6px;
    display: flex;
-   flex-direction: row;
-   justify-content: flex-start;
+   justify-content: space-between;
    gap: 10px;
+   flex-wrap: wrap;
+
+   &:hover {
+      background-color: aliceblue;
+   }
+
+   .route-container {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+
+      span{
+         font-weight: 600;
+      }
+   }
+
+   .real-time-container {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      .time-reamain {
+         display: flex;
+         gap: 2px;
+      }
+   }
+
+   .blink_me {
+      animation: blinker 1s linear infinite;
+   }
+
+   @keyframes blinker {
+      50% {
+         opacity: 0;
+      }
+   }
 }

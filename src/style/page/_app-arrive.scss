@@ -1,6 +1,17 @@
 .app-arrive {
+   height: 100vh;
+   padding: 10px;
+   
    h1 {
       text-align: center;
+   }
+
+   .nav-tabs .nav-link {
+      color: #FFF;
+
+      &.active{
+         color: #121212;
+      }
    }
 
    .accordion-item {
@@ -15,12 +26,6 @@
       color: unset !important;
       background-color: unset !important;
    }
-
-   // .accordion-button:not(.collapsed) {
-   //    color: #FFF;
-   //    font-size: rem(26px);
-   //    background-color: unset;
-   // }
 
    .accordion-button.collapsed::after {
       background: url("../imgs/down-arrow.svg");
