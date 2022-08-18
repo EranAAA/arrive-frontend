@@ -1,4 +1,5 @@
 import { arriveService } from '../../services/arrive.service.js'
+import { routeService } from '../../services/route.service.js'
 import { utilService } from '../../services/util.service'
 
 export function setArrive(arrive) {
@@ -18,6 +19,31 @@ export function loadArrives() {
       }
    } catch (err) {
       console.log('cannot load arrives', err)
+   }
+}
+
+export function loadSavedRoutes() {
+   try {
+      return async (dispatch) => {
+         const routes = await routeService.query()
+         console.log('Got Routes')
+         dispatch({ type: 'SET_ROUTES', routes })
+      }
+   } catch (err) {
+      console.log('cannot load routes', err)
+   }
+}
+
+export function saveRoute(route) {
+   try {
+      return async (dispatch) => {
+         const savedRoute = await routeService.save(route)
+         console.log('Added Route')
+         dispatch({ type: 'UPDATE_ROUTE', route: savedRoute })
+         return savedRoute
+      }
+   } catch (err) {
+      console.log('cannot add route', err)
    }
 }
 

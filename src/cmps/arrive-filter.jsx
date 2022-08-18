@@ -33,7 +33,7 @@ export const ArriveFilter = ({ stopsList, timeList, getTripResult }) => {
          <Dropdown data={dataList} title='תחנת עלייה' width={300} value={setFrom} filter={filter.from}/>
          <Dropdown data={dataList} title='תחנת ירידה' width={300} value={setTo} filter={filter.to}/>
          <Dropdown data={timeList} title='זמן' width={100} value={setTime} filter={filter.time}/>
-         <div onClick={OnSubmit}><LoadingButton /></div>
+         <div onClick={OnSubmit}><LoadingButton title={'חפש'} width={300}/></div>
       </div>
    )
 }

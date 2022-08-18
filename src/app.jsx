@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './style/main.scss'
 
 import { AppArrive } from './page/app-arrive'

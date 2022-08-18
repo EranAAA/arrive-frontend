@@ -2,6 +2,7 @@ const initialState = {
    stops: [],
    routs: [],
    results: [],
+   routes: [],
    filter: {}
 }
 
@@ -23,6 +24,14 @@ export function arriveReducer(state = initialState, action) {
 
       case 'SET_FILTER':
          newState = { ...state, filter: action.filter }
+         break
+
+      case 'SET_ROUTES':
+         newState = { ...state, routes: action.routes }
+         break
+
+      case 'UPDATE_ROUTE':
+         newState = { ...state, routes: [...state.routes, action.route] }
          break
 
       default:

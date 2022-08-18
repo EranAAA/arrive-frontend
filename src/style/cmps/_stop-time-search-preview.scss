@@ -1,4 +1,6 @@
 .stop-time-preview {
+   position: relative;
+
    max-width: 800px;
    background-color: #fff;
    color: rgb(47, 47, 47);
@@ -9,9 +11,15 @@
    padding-right: 2rem;
    padding-left: 1rem;
    cursor: pointer;
+   min-height: 100px;
 
    display: flex;
    flex-direction: row;
    justify-content: flex-start;
    gap: 10px;
+
+   .btn {
+      position: absolute;
+      left: 0;
+   }
 }
