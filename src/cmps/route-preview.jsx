@@ -43,6 +43,8 @@ export const RoutePreview = ({ route }) => {
          const stop = utilService.getTimeInMs(route.arrival_time)
 
          if (now >= start && now <= stop) setTimeRemaining(`${(stop - now) / 1000} דקות`)
+         else clearInterval(intervalId.current)
+
       }, 60000);
    }
 
@@ -57,7 +59,7 @@ export const RoutePreview = ({ route }) => {
          </div>
 
          <div className="real-time-container">
-            {!timeRemaining && <div className="time-reamain">{route.first_train.substring(0, 5)}</div>}
+            {!timeRemaining && <div className="time-reamain"><span>שעת יציאה </span>{route.first_train.substring(0, 5)}</div>}
             {timeRemaining && <div className="time-reamain">🟢<div className="blink_me"></div>{timeRemaining}</div>}
             {siri && <div className="siri"> {getTime(siri.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)}</div>}
          </div>

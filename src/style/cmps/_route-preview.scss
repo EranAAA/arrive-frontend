@@ -22,7 +22,9 @@
       display: flex;
       gap: 5px;
       align-items: center;
-
+      white-space: nowrap;
+      flex-wrap: wrap;
+      
       span{
          font-weight: 600;
       }
