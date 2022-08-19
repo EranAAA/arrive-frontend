@@ -1,13 +1,12 @@
 .loading-button {
 
    .button {
-      background: #FFF;
+      background-color: rgb(47, 47, 47);
+      color: #FFF;
       padding: 12px 25px;
       border: none;
       font-size: 18px;
-      // border-radius: 6px;
       cursor: pointer;
-      color: #262470;
       transition: 0.3s ease all;
       box-shadow: 1px 2px 9px 4px rgb(0 0 0 / 30%);
       width: 100px;
@@ -17,8 +16,7 @@
       }
 
       &:hover {
-         background-color: rgb(47,47,47);      
-         color: #FFF;
+         background-color: rgb(64, 59, 59);
       }
 
       &.clicked {

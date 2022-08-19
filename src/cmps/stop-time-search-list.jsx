@@ -4,10 +4,10 @@ import BounceLoader from "react-spinners/BounceLoader";
 import { StopTimeSearchPreview } from './stop-time-search-preview'
 
 export const StopTimeSearchList = ({ results }) => {
-console.log(results);
-   if (!results) return <BounceLoader cssOverride={{ margin: "100px auto" }} color={'#ffffff'} />
 
-   console.log(results[0]);
+   console.log('results', results);
+   
+   if (!results) return <BounceLoader cssOverride={{ margin: "100px auto" }} color={'#ffffff'} />
 
    return (
       <div className="stop-time-list">

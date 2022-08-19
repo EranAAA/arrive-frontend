@@ -18,6 +18,7 @@ export const ArriveFilter = ({ stopsList, timeList, getTripResult }) => {
    }, [stopsList])
    
    const OnSubmit = () => {
+      // if ()
       getTripResult({ from, to, time })
    }
 
@@ -30,10 +31,10 @@ export const ArriveFilter = ({ stopsList, timeList, getTripResult }) => {
 
    return (
       <div className="arrive-filter">
-         <Dropdown data={dataList} title='תחנת עלייה' width={300} value={setFrom} filter={filter.from}/>
-         <Dropdown data={dataList} title='תחנת ירידה' width={300} value={setTo} filter={filter.to}/>
+         <Dropdown data={dataList} title='תחנת עלייה' width={180} value={setFrom} filter={filter.from}/>
+         <Dropdown data={dataList} title='תחנת ירידה' width={180} value={setTo} filter={filter.to}/>
          <Dropdown data={timeList} title='זמן' width={100} value={setTime} filter={filter.time}/>
-         <div onClick={OnSubmit}><LoadingButton title={'חפש'} width={300}/></div>
+         <div onClick={OnSubmit}><LoadingButton title={'חפש'} width={100}/></div>
       </div>
    )
 }

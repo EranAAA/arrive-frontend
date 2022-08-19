@@ -11,6 +11,7 @@ export const RouteList = ({ routes }) => {
 
    return (
       <div className="route-list">
+         <h3>רשימת הרכבות</h3>
          <div className="gird-conatiner">
             {routes
                .sort((a, b) => utilService.getTimeInMs(b.arrival_time) - utilService.getTimeInMs(a.arrival_time))

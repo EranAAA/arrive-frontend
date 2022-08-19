@@ -1,19 +1,20 @@
 .route-preview {
-   background-color: #262470;
-   color: #FFF;
-   // color: rgb(47, 47, 47);
-   border: 1px solid #e2e2e2;
-   margin-bottom: 0.5rem;
-   padding-top: 1.5rem;
-   padding-bottom: 1.5rem;
-   padding-right: 2rem;
-   padding-left: 1rem;
-   cursor: pointer;
-   border-radius: 6px;
+   position: relative;
    display: flex;
    justify-content: space-between;
-   gap: 10px;
    flex-wrap: wrap;
+   flex-direction: column;
+   align-items: center;
+   gap: 10px;
+
+   background-color: #FFF;
+   color: rgb(47, 47, 47);
+
+   margin-top: 16px;
+   padding: 13px 50px;
+   border-radius: 6px;
+
+   // cursor: pointer;
 
    &:hover {
       box-shadow: 0 0 0 0;
@@ -25,6 +26,15 @@
       align-items: center;
       white-space: nowrap;
       flex-wrap: wrap;
+      justify-content: center;
+
+      .schedule-container {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         width: 230px;
+
+      }
 
       span {
          font-weight: 600;
@@ -37,43 +47,20 @@
    }
 
    .days {
+      position: absolute;
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
       width: 100%;
-
-      // .in-schedule-today {
-      //    display: flex;
-      //    width: 40px;
-      //    height: 20px;
-      //    color: #FFF;
-      //    background-color: darkblue;
-      //    border-radius: 5px;
-      //    margin-inline-end: 5px;
-      //    justify-content: center;
-      //    align-items: center;
-      //    border: 2px solid gold;
-      // }
-
-      // .off-schedule-today {
-      //    display: flex;
-      //    width: 40px;
-      //    height: 20px;
-      //    color: #FFF;
-      //    background-color: darkgray;
-      //    border-radius: 5px;
-      //    margin-inline-end: 5px;
-      //    justify-content: center;
-      //    align-items: center;
-      //    border: 2px solid gold;
-      // }
+      top: -10px;
+      right: 14px;
 
       .in-schedule {
          display: flex;
          width: 40px;
          height: 20px;
          color: #FFF;
-         background-color: #5eed5e;
+         background-color: #78b271;
          border-radius: 5px;
          margin-inline-end: 5px;
          justify-content: center;

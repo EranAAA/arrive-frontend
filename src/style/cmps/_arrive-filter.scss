@@ -1,9 +1,13 @@
-
 .arrive-filter {
+   position: absolute;
    display: flex;
-   flex-direction: column;
-   gap: 10px;
-   background-color: #262470;
+   gap: 3px;
    padding: 10px;
+   left: 22%;
+   top: 44%;
 
+   @media (max-width: 1000px) {
+      left: 0%;
+
+   }
 }

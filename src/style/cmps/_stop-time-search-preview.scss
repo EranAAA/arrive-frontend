@@ -1,42 +1,21 @@
-.stop-time-preview {
-   // background-color: #fff;
-   background-color: #262470;
+.route-preview {
 
-   // color: rgb(47, 47, 47);
-   color: #FFF;
-   margin-bottom: 0.5rem;
-   border-radius: 5px;
-   padding: 20px 10px;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   gap: 10px;
-   cursor: pointer;
-
-   &:hover {
-      // background-color: aliceblue;
-   }
-
-   .stop-container {
-      display: flex;
-      gap: 5px;
-      align-items: center;
-
-      span {
-         font-weight: 600;
-      }
-   }
-
-   .btn {
+   .btn-submit {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      
       &:hover {
-         border: unset !important;
-         color: lightslategray
+         svg {
+            color: darkcyan;
+         }
       }
       svg {
          width: 40px;
          height: 40px;
-         color: #FFF
+         color: #121212
       }
    }
 }

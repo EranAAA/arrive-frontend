@@ -8,9 +8,12 @@
 @import './basics/base';
 
 // PAGE
+@import './page/app-home';
+@import './page/app-search';
 @import './page/app-arrive';
 
 // COMPONENTS
+@import './cmps/app-header';
 @import './cmps/arrive-filter';
 @import './cmps/stop-time-search-list';
 @import './cmps/stop-time-search-preview';
