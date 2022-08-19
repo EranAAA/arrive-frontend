@@ -1,6 +1,9 @@
 .stop-time-preview {
-   background-color: #fff;
-   color: rgb(47, 47, 47);
+   // background-color: #fff;
+   background-color: #262470;
+
+   // color: rgb(47, 47, 47);
+   color: #FFF;
    margin-bottom: 0.5rem;
    border-radius: 5px;
    padding: 20px 10px;
@@ -12,7 +15,7 @@
    cursor: pointer;
 
    &:hover {
-      background-color: aliceblue;
+      // background-color: aliceblue;
    }
 
    .stop-container {
@@ -33,6 +36,7 @@
       svg {
          width: 40px;
          height: 40px;
+         color: #FFF
       }
    }
 }

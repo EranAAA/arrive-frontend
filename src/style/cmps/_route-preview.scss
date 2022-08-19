@@ -1,6 +1,7 @@
 .route-preview {
-   background-color: #fff;
-   color: rgb(47, 47, 47);
+   background-color: #262470;
+   color: #FFF;
+   // color: rgb(47, 47, 47);
    border: 1px solid #e2e2e2;
    margin-bottom: 0.5rem;
    padding-top: 1.5rem;
@@ -15,7 +16,7 @@
    flex-wrap: wrap;
 
    &:hover {
-      background-color: aliceblue;
+      box-shadow: 0 0 0 0;
    }
 
    .route-container {
@@ -25,7 +26,7 @@
       white-space: nowrap;
       flex-wrap: wrap;
 
-      span{
+      span {
          font-weight: 600;
       }
 
@@ -33,6 +34,64 @@
          height: 30px;
          width: 30px;
       }
+   }
+
+   .days {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      width: 100%;
+
+      // .in-schedule-today {
+      //    display: flex;
+      //    width: 40px;
+      //    height: 20px;
+      //    color: #FFF;
+      //    background-color: darkblue;
+      //    border-radius: 5px;
+      //    margin-inline-end: 5px;
+      //    justify-content: center;
+      //    align-items: center;
+      //    border: 2px solid gold;
+      // }
+
+      // .off-schedule-today {
+      //    display: flex;
+      //    width: 40px;
+      //    height: 20px;
+      //    color: #FFF;
+      //    background-color: darkgray;
+      //    border-radius: 5px;
+      //    margin-inline-end: 5px;
+      //    justify-content: center;
+      //    align-items: center;
+      //    border: 2px solid gold;
+      // }
+
+      .in-schedule {
+         display: flex;
+         width: 40px;
+         height: 20px;
+         color: #FFF;
+         background-color: #5eed5e;
+         border-radius: 5px;
+         margin-inline-end: 5px;
+         justify-content: center;
+         align-items: center;
+      }
+
+      .off-schedule {
+         display: flex;
+         width: 40px;
+         height: 20px;
+         color: #FFF;
+         background-color: darkgray;
+         border-radius: 5px;
+         margin-inline-end: 5px;
+         justify-content: center;
+         align-items: center;
+      }
+
    }
 
    .real-time-container {
@@ -63,5 +122,3 @@
       }
    }
 }
-
-
