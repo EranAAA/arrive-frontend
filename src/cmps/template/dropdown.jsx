@@ -11,6 +11,7 @@ export const Dropdown = ({ data, title, width, value, filter }) => {
    const [selectedItem, setSelectedItem] = useState(filter);
 
    useEffect(() => {
+      // setItem([{id: -1, label: title}, ...data])
       setItem(data)
    }, [data])
 
@@ -40,13 +41,16 @@ export const Dropdown = ({ data, title, width, value, filter }) => {
 
          <div className={`dropdown-body ${isOpen && "open"}`} style={{ width: `${width}px` }}>
             {items.map((item, idx) => (
-               <div className="dropdown-item" key={idx} onClick={(e) => debouncedOnChange(e.target.id, item)} id={item.id} >
+               <div className={`dropdown-item ${item.label == selectedItem && "selected"}`} key={idx} onClick={(e) => debouncedOnChange(e.target.id, item)} id={item.id} >
                   <span className={`dropdown-item-dot ${item.label == selectedItem && "selected"}`} >•{" "}</span>
                   {item.label}
                </div>
             ))}
          </div>
+
       </div>
    )
 }
+
+
 

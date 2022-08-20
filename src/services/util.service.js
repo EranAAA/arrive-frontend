@@ -15,6 +15,7 @@ export const utilService = {
     getMonthName,
     getTimeList,
     getTimeInMs,
+    getCurrentTimeFormat
 }
 
 function makeId(length = 6) {
@@ -199,5 +200,11 @@ function getTimeList() {
 
 function getTimeInMs(t) {
     return Number(t.split(':')[0]) * 60 * 1000 + Number(t.split(':')[1]) * 1000;
+}
+
+function getCurrentTimeFormat() {
+const today = new Date();
+const time = today.getHours() + ":00"
+return time
 }
 

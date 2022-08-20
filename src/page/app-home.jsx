@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { utilService } from '../services/util.service'
 import { ArriveFilter } from '../cmps/arrive-filter'
 
-import { loadArrives, setFilter, loadResults, loadSavedRoutes, saveRoute } from '../store/arrive/arrive.action'
+import { loadArrives, setFilter, loadResults, loadSavedRoutes } from '../store/arrive/arrive.action'
 
 export const ArriveContext = createContext()
 
@@ -31,14 +31,7 @@ export const AppHome = () => {
       const results = await dispatch(loadResults(trip))
       console.log('results', results)
       navigate('/search', /*{state: Your data}*/)
-
    }
-
-   const updateRoute = async (route) => {
-      console.log('updateRoute', route);
-      await dispatch(saveRoute(route))
-   }
-
 
    return (
       <section className="app-home">

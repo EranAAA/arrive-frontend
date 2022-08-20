@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 import { BsCircleFill } from 'react-icons/bs'
-import { CgArrowLongLeftR } from 'react-icons/cg'
+import { CgArrowLongLeft } from 'react-icons/cg'
+import { MdOutlineHorizontalRule } from 'react-icons/md'
 
 import { utilService } from '../services/util.service'
 import { siriService } from '../services/siri.service'
@@ -48,6 +49,13 @@ export const RoutePreview = ({ route }) => {
       return arrival_time - time
    }
 
+   const getTripLong = () => {
+      let start = utilService.getTimeInMs(route.arrival_time)
+      let end = utilService.getTimeInMs(route.arrival_time_a)
+      if (((end - start) / 1000) < 0) return 0
+      else return (end - start) / 1000
+   }
+
    const startIntervral = () => {
       getTimeRemainingToArrive()
       intervalIdTime.current = setInterval(() => {
@@ -63,7 +71,7 @@ export const RoutePreview = ({ route }) => {
       const start = utilService.getTimeInMs(route.first_train)
       const stop = utilService.getTimeInMs(route.arrival_time)
 
-      if (now >= start && now <= stop) {
+      if (now >= start && now <= stop && getIsInSchedule()) {
          setTimeRemaining(`${(stop - now) / 1000} דקות`)
       }
       else {
@@ -78,19 +86,25 @@ export const RoutePreview = ({ route }) => {
       else if (route.days.charAt(day) === '0') return <span className="off-schedule">{daysLetters[day]}</span>
    }
 
+   const getIsInSchedule = () => {
+      const dayOfWeekDigit = new Date().getDay();
+      return route.days.charAt(dayOfWeekDigit) === '1'
+   }
+
    return (
       <div className="route-preview">
          <div className="route-container">
             <div className="schedule-container">
-               <div className="stop-name"><span> </span>{route.stop_name},</div>
+               <div className="stop-name"><span> </span>{route.stop_name}</div>
                <div className="arrive-time"><span> </span> {route.arrival_time.substring(0, 5)}</div>
             </div>
-            <CgArrowLongLeftR />
+            <MdOutlineHorizontalRule />
+            {`(${getTripLong()} דקות)`}
+            <CgArrowLongLeft />
             <div className="schedule-container">
                <div className="stop-name"><span> </span>{route.stop_name_a}</div>
                <div className="destination-time"><span> </span>{route.arrival_time_a.substring(0, 5)}</div>
             </div>
-
          </div>
 
          <div className="days">
@@ -101,6 +115,10 @@ export const RoutePreview = ({ route }) => {
             <div className="thursday">{getdays(4)}</div>
             <div className="friday">{getdays(5)}</div>
             <div className="saturday">{getdays(6)}</div>
+         </div>
+
+         <div className="train_no">
+            <div className="number">{`מספר רכבת ${route.train_no}`}</div>
          </div>
 
          <div className="real-time-container">

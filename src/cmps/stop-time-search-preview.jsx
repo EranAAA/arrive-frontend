@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { BsCircleFill } from 'react-icons/bs'
-import { CgArrowLongLeftR } from 'react-icons/cg'
+import { CgArrowLongLeft } from 'react-icons/cg'
+import { MdOutlineHorizontalRule } from 'react-icons/md'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
+
+import { saveRoute } from '../store/arrive/arrive.action'
 
 import { utilService } from '../services/util.service'
 
 export const StopTimeSearchPreview = ({ stop }) => {
 
+   const dispatch = useDispatch()
    const [timeRemaining, setTimeRemaining] = useState('')
    const intervalIdTime = useRef()
 
@@ -33,7 +38,7 @@ export const StopTimeSearchPreview = ({ stop }) => {
       const start = utilService.getTimeInMs(stop.first_train)
       const stopTime = utilService.getTimeInMs(stop.arrival_time)
 
-      if (now >= start && now <= stopTime) {
+      if (now >= start && now <= stopTime && getIsInSchedule()) {
          setTimeRemaining(`${(stopTime - now) / 1000} דקות`)
       }
       else {
@@ -48,9 +53,25 @@ export const StopTimeSearchPreview = ({ stop }) => {
       else if (stop.days.charAt(day) === '0') return <span className="off-schedule">{daysLetters[day]}</span>
    }
 
+   const getIsInSchedule = () => {
+      const dayOfWeekDigit = new Date().getDay();
+      return stop.days.charAt(dayOfWeekDigit) === '1'
+   }
+
+   const getTripLong = () => {
+      let start = utilService.getTimeInMs(stop.arrival_time)
+      let end = utilService.getTimeInMs(stop.arrival_time_a)
+      if (((end - start) / 1000) < 0) return 0
+      else return (end - start) / 1000
+   }
+
    const OnSubmit = () => {
-      console.log('Clicked onSubmit');
-      // updateRoute(stop)
+      updateRoute(stop)
+   }
+
+   const updateRoute = async (route) => {
+      console.log('updateRoute', route);
+      await dispatch(saveRoute(route))
    }
 
    return (
@@ -58,11 +79,12 @@ export const StopTimeSearchPreview = ({ stop }) => {
 
          <div className="route-container">
             <div className="schedule-container">
-               <div className="stop-name"><span> </span>{stop.stop_name},</div>
+               <div className="stop-name"><span> </span>{stop.stop_name}</div>
                <div className="arrive-time"><span> </span> {stop.arrival_time.substring(0, 5)}</div>
             </div>
-            <CgArrowLongLeftR />
-            <div className="schedule-container">
+            <MdOutlineHorizontalRule />
+            {`(${getTripLong()} דקות)`}
+            <CgArrowLongLeft />            <div className="schedule-container">
                <div className="stop-name"><span> </span>{stop.stop_name_a}</div>
                <div className="destination-time"><span> </span>{stop.arrival_time_a.substring(0, 5)}</div>
             </div>
@@ -76,6 +98,10 @@ export const StopTimeSearchPreview = ({ stop }) => {
             <div className="thursday">{getdays(4)}</div>
             <div className="friday">{getdays(5)}</div>
             <div className="saturday">{getdays(6)}</div>
+         </div>
+
+         <div className="train_no">
+            <div className="number">{`מספר רכבת ${stop.train_no}`}</div>
          </div>
 
          <div className="real-time-container">

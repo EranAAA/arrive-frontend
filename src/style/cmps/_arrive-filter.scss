@@ -6,6 +6,16 @@
    left: 22%;
    top: 44%;
 
+   .msg {
+      position: absolute;
+      display: flex;
+      gap: 3px;
+      padding: 10px;
+      left: 46%;
+      top: 80%;
+   }
+
+
    @media (max-width: 1000px) {
       left: 0%;
 

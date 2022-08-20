@@ -1,6 +1,7 @@
 .app-header {
-   height: 50px;
-   background-color: brown;
+   height: 100px;
+   // background-color: brown;
+   background-color: #121212eb;
    color: #FFF;
    position: fixed;
    top: 0;
@@ -8,9 +9,10 @@
    align-items: center;
    width: 100%;
    padding: 10px;
+   border-bottom: 1px solid;
 
    h1 {
-      font-size: 35px;
+      font-size: 40px;
       margin-inline-end: 50px;
       margin-bottom: 0px;
       cursor: pointer;
@@ -18,15 +20,25 @@
 
    nav {
       display: flex;
-      gap: 25px;
+      gap: 50px;
       cursor: pointer;
       font-size: 20px;
+      // color: #262470;
 
       a {
-         color: #121212;
+         // color: #121212;
+         color: #FFF;
          text-decoration: none;
+
+         svg {
+            vertical-align: bottom;
+            width: 25px;
+            height: 25px;
+         }
+
          &:hover {
-            color: #FFF;
+            // color: #262470;
+            color: #03a9f4;
          }
       }
    }

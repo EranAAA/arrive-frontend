@@ -34,6 +34,16 @@
       &:hover {
          background-color: #91A5BE;
       }
+
+      .selected {
+         text-decoration: underline;
+         // background-color: #91A5BE;
+      }
+
+      &.selected {
+         text-decoration: underline;
+         background-color: #91A5BE;
+      }
    }
 
    .dropdown-item:hover {

@@ -1,16 +1,18 @@
 .stop-time-list {
+   color: #FFF;
 
    h3 {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 0.5rem;
+      font-size: 30px;
    }
 
    .gird-conatiner {
       margin-top: 10px;
       overflow: scroll;
-      height: calc(100vh - 130px);
+      height: calc(100vh - 180px);
       display: flex;
       flex-direction: column;
       align-items: center;
