@@ -11,12 +11,16 @@
 
    .gird-conatiner {
       margin-top: 10px;
-      overflow: scroll;
-      height: calc(100vh - 180px);
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: calc(100vh - 240px);
       display: flex;
       flex-direction: column;
       align-items: center;
    }
 
-
+   .dropdown-inlist {
+      display: flex;
+      justify-content: center;
+   }
 }

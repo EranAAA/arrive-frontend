@@ -10,7 +10,7 @@ export const AppArrive = () => {
    const { routes } = useSelector(({ arriveModule }) => arriveModule)
 
    useEffect(() => {
-      if (!routes.length) return loadData()
+      if (!routes.length) loadData()
    }, [])
 
    const loadData = async () => {

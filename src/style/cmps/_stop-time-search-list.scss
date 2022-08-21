@@ -11,7 +11,8 @@
 
    .gird-conatiner {
       margin-top: 10px;
-      overflow: scroll;
+      overflow-y: scroll;
+      overflow-x: hidden;
       height: calc(100vh - 180px);
       display: flex;
       flex-direction: column;

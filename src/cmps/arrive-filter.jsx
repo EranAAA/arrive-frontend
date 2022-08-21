@@ -17,8 +17,6 @@ export const ArriveFilter = ({ stopsList, timeList, getTripResult }) => {
 
    useEffect(() => {
       getDataList(stopsList)
-      console.log('utilService.getCurrentTimeFormat()', utilService.getCurrentTimeFormat());
-      console.log('filter.time',filter.time );
    }, [stopsList])
 
    const OnSubmit = () => {

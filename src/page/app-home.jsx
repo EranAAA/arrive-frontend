@@ -33,6 +33,8 @@ export const AppHome = () => {
       navigate('/search', /*{state: Your data}*/)
    }
 
+   if (!stops) return
+
    return (
       <section className="app-home">
          <div className="title">
