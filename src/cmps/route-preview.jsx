@@ -1,95 +1,65 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { BsCircleFill } from 'react-icons/bs'
 import { CgArrowLongLeft } from 'react-icons/cg'
 import { MdOutlineHorizontalRule } from 'react-icons/md'
+import { AiOutlinePlusSquare } from 'react-icons/ai'
 
 import { utilService } from '../services/util.service'
 import { siriService } from '../services/siri.service'
 
-export const RoutePreview = ({ route }) => {
+import { saveRoute } from '../store/arrive/arrive.action'
+
+export const RoutePreview = ({ route, isInSearchList = false }) => {
+
+   const dispatch = useDispatch()
 
    const [siri, setSiri] = useState('')
    const [timeRemaining, setTimeRemaining] = useState('')
 
    const intervalIdTime = useRef()
-   const intervalIdSiri = useRef()
 
    useEffect(() => {
+      setSiri('')
       loadSiri()
       startIntervral()
 
       return () => {
+         setSiri('')
          clearInterval(intervalIdTime.current)
-         clearInterval(intervalIdSiri.current)
       }
-   }, [])
+   }, [route])
 
    const loadSiri = async () => {
+      setSiri('')
       const data = await siriService.query({ stop: route.stop_code, train_no: route.train_no, route_id: route.route_id, direction: route.direction_id })
       setSiri(data[0])
-
-      // intervalIdTime.current = setInterval(() => {
-      //    const data = await siriService.query({ stop: route.stop_code, train_no: route.train_no, route_id: route.route_id, direction: route.direction_id })
-      //    setSiri(data[0])
-      // }, 60000);
-   }
-
-   const getTime = (date) => {
-      const time = new Date(date)
-      const now = new Date();
-      return time.toLocaleTimeString('HE-il', { hour: 'numeric', minute: 'numeric' })
-   }
-
-   const getTimeDiff = () => {
-      let time = new Date(siri.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)
-      time = time.toLocaleTimeString('HE-il', { hour: 'numeric', minute: 'numeric' })
-      time = utilService.getTimeInMs(time)
-      let arrival_time = utilService.getTimeInMs(route.arrival_time)
-      return arrival_time - time
-   }
-
-   const getTripLong = () => {
-      let start = utilService.getTimeInMs(route.arrival_time)
-      let end = utilService.getTimeInMs(route.arrival_time_a)
-      if (((end - start) / 1000) < 0) return 0
-      else return (end - start) / 1000
+      console.log('Called siri');
    }
 
    const startIntervral = () => {
-      getTimeRemainingToArrive()
+      setTimeDiff()
+
       intervalIdTime.current = setInterval(() => {
-         getTimeRemainingToArrive()
+         setTimeDiff()
       }, 60000);
    }
 
-   const getTimeRemainingToArrive = () => {
-      const time = new Date();
-      const current = time.getHours() + ':' + time.getMinutes();
-
-      const now = utilService.getTimeInMs(current)
-      const start = utilService.getTimeInMs(route.first_train)
-      const stop = utilService.getTimeInMs(route.arrival_time)
-
-      if (now >= start && now <= stop && getIsInSchedule()) {
-         setTimeRemaining(`${(stop - now) / 1000} דקות`)
-      }
-      else {
-         setTimeRemaining('')
-         clearInterval(intervalIdTime.current)
-      }
+   const setTimeDiff = () => {
+      const arrive = utilService.getTimeRemainingToArrive(route, siri)
+      setTimeRemaining(arrive)
    }
 
-   const getdays = (day) => {
-      const daysLetters = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש',]
-      if (route.days.charAt(day) === '1') return <span className="in-schedule">{daysLetters[day]}</span>
-      else if (route.days.charAt(day) === '0') return <span className="off-schedule">{daysLetters[day]}</span>
+   const OnSubmit = () => {
+      updateRoute(route)
    }
 
-   const getIsInSchedule = () => {
-      const dayOfWeekDigit = new Date().getDay();
-      return route.days.charAt(dayOfWeekDigit) === '1'
+   const updateRoute = async (route) => {
+      console.log('updateRoute', route);
+      await dispatch(saveRoute(route))
    }
+
 
    return (
       <div className="route-preview">
@@ -99,7 +69,7 @@ export const RoutePreview = ({ route }) => {
                <div className="arrive-time"><span> </span> {route.arrival_time.substring(0, 5)}</div>
             </div>
             <MdOutlineHorizontalRule />
-            {`(${getTripLong()} דקות)`}
+            {`(${utilService.getTripLong(route)} דקות)`}
             <CgArrowLongLeft />
             <div className="schedule-container">
                <div className="stop-name"><span> </span>{route.stop_name_a}</div>
@@ -108,24 +78,26 @@ export const RoutePreview = ({ route }) => {
          </div>
 
          <div className="days">
-            <div className="sunday">{getdays(0)}</div>
-            <div className="monday">{getdays(1)}</div>
-            <div className="tuesday">{getdays(2)}</div>
-            <div className="wednesday">{getdays(3)}</div>
-            <div className="thursday">{getdays(4)}</div>
-            <div className="friday">{getdays(5)}</div>
-            <div className="saturday">{getdays(6)}</div>
+            <div className="sunday">{utilService.getdays(route.days, 0)}</div>
+            <div className="monday">{utilService.getdays(route.days, 1)}</div>
+            <div className="tuesday">{utilService.getdays(route.days, 2)}</div>
+            <div className="wednesday">{utilService.getdays(route.days, 3)}</div>
+            <div className="thursday">{utilService.getdays(route.days, 4)}</div>
+            <div className="friday">{utilService.getdays(route.days, 5)}</div>
+            <div className="saturday">{utilService.getdays(route.days, 6)}</div>
          </div>
 
          <div className="train_no">
-            <div className="number">{`מספר רכבת ${route.train_no}`}</div>
+            <div className="number">{`רכבת ${route.train_no}`}</div>
          </div>
 
          <div className="real-time-container">
             {!timeRemaining && <div className="no-time-reamain"><span>שעת יציאה </span>{route.first_train.substring(0, 5)}</div>}
             {timeRemaining && <div className="time-reamain"><div className="blink_me"><BsCircleFill /></div>{timeRemaining}</div>}
-            {siri && <div className="siri">איחור {getTimeDiff()}</div>}
+            {siri && /*!!utilService.getTimeDiff(route, siri) &&*/ <div className="siri">{`(${utilService.getTimeDiff(route, siri)}+)`}</div>}
          </div>
+
+         { isInSearchList && <div className="btn-submit" onClick={OnSubmit}><AiOutlinePlusSquare /></div>}
 
       </div>
    )

@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import BounceLoader from "react-spinners/BounceLoader";
 
-import { StopTimeSearchPreview } from './stop-time-search-preview'
+import { utilService } from '../services/util.service'
+import { RoutePreview } from './route-preview'
 
 export const StopTimeSearchList = ({ results }) => {
 
@@ -13,7 +14,9 @@ export const StopTimeSearchList = ({ results }) => {
       <div className="stop-time-list">
          <h3>תוצאות החיפוש</h3>
          <div className="gird-conatiner">
-            {results.map((stop, idx) => <StopTimeSearchPreview stop={stop} key={idx} />)}
+            {results
+               .sort((a, b) => utilService.getTimeInMs(a.arrival_time) - utilService.getTimeInMs(b.arrival_time))
+               .map((route, idx) => <RoutePreview route={route} key={idx} isInSearchList={true}/>)}
          </div>
       </div>
    )

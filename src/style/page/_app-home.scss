@@ -2,28 +2,39 @@
    margin-top: 100px;
    height: calc(100vh - 100px);
    padding: 10px;
-   // background-color: brown;
    background-color: #121212eb;
    position: relative;
    background-image: url('../imgs/time-late-icon.svg');
    background-blend-mode: soft-light;
-   // background-position: right;
    background-repeat: no-repeat;
    background-size: 350px;
    background-position-y: bottom;
    color: #FFF;
 
+   @media (max-width: 400px) {
+      background-size: 200px;
+   }
+
    .title {
       padding-top: 50px;
       padding-inline-start: 120px;
 
-      .image {}
+      @media (max-width: 900px) {
+         padding-inline-start: 10px;
+      }
+
+      @media (max-width: 500px) {
+         padding-top: 10px;
+      }
 
       h1 {
          font-size: 60px;
          font-family: Rubik-BoldItalic;
-         width: 445px;
+         max-width: 445px;
 
+         @media (max-width: 500px) {
+            font-size: 40px;
+         }
       }
 
       p {

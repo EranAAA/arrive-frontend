@@ -1,4 +1,4 @@
-import { utilService } from './util.service'
+import { v4 as uuidv4 } from 'uuid'
 
 export const storageService = {
    query,
@@ -27,7 +27,7 @@ async function get(entityType, entityId) {
 
 async function post(entityType, newEntity) {
    const entities = await query(entityType)
-   newEntity._id = utilService.makeId()
+   newEntity._id = uuidv4()
    entities.push(newEntity)
    _save(entityType, entities)
    return newEntity

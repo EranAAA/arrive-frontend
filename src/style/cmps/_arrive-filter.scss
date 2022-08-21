@@ -6,6 +6,16 @@
    left: 22%;
    top: 44%;
 
+   @media (max-width: 1000px) {
+      left: 10px;
+   }
+
+   @media (max-width: 600px) {
+      flex-direction: column;
+      right: 10px;
+
+   }
+
    .msg {
       position: absolute;
       display: flex;
@@ -13,11 +23,12 @@
       padding: 10px;
       left: 46%;
       top: 80%;
+
+      @media (max-width: 600px) {
+         left: unset;
+         top: 100%;
+      }
    }
 
-
-   @media (max-width: 1000px) {
-      left: 0%;
-
-   }
+  
 }

@@ -5,6 +5,10 @@
    background-color: white;
    color: #262470;
 
+   // @media (max-width: 600px) {
+   //    width: 159px !important;
+   // }
+
    .dropdown-header {
       padding: 15px;
       cursor: pointer;
@@ -27,6 +31,10 @@
       position: absolute;
       background: #FFF;
       z-index: 1;
+
+      // @media (max-width: 600px) {
+      //    width: 159px !important;
+      // }
    }
 
    .dropdown-item {

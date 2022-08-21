@@ -1,7 +1,21 @@
 .app-arrive {
+   color: #FFF;
    margin-top: 100px;
    height: calc(100vh - 100px);
    padding: 10px;
    // background-color: brown;
    background-color: #121212eb;
+
+   h3 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.5rem;
+      font-size: 30px;
+   }
+
+   .dropdown-container {
+      display: flex;
+      justify-content: center;
+   }
 }
