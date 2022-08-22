@@ -26,7 +26,9 @@ export const Dropdown = ({ data, title, width, value, filter }) => {
    const debouncedOnChange = debounce(handleChange, 0)
 
    if (!items) return
-
+   console.log('items', items);
+   console.log('title', title);
+   console.log('selectedItem', selectedItem);
    return (
       <div className="dropdown" style={{ width: `${width}px` }}>
 

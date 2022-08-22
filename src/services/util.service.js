@@ -136,7 +136,7 @@ function getTimeInMs(t) {
 
 function getCurrentTimeFormat() {
     const today = new Date();
-    const hour = today.getHours() <= 10 ? "0" + today.getHours() : today.getHours()
+    const hour = today.getHours() < 10 ? "0" + today.getHours() : today.getHours()
     const time = hour + ":00"
     return time
 }
