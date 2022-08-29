@@ -1,5 +1,5 @@
 import React from 'react'
-import BounceLoader from "react-spinners/BounceLoader";
+// import BounceLoader from "react-spinners/BounceLoader";
 
 import { utilService } from '../services/util.service'
 import { RoutePreview } from './route-preview'
@@ -8,7 +8,7 @@ export const StopTimeSearchList = ({ results }) => {
 
    console.log('results', results);
    
-   if (!results) return <BounceLoader cssOverride={{ margin: "100px auto" }} color={'#ffffff'} />
+   // if (!results) return <BounceLoader cssOverride={{ margin: "100px auto" }} color={'#ffffff'} />
 
    return (
       <div className="stop-time-list">

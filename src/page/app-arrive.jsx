@@ -9,7 +9,7 @@ import { Dropdown } from '../cmps/template/dropdown'
 export const AppArrive = () => {
 
    const dispatch = useDispatch()
-   const { routes } = useSelector(({ arriveModule }) => arriveModule)
+   const { routes, siri } = useSelector(({ arriveModule }) => arriveModule)
 
    const [status, setStatus] = useState('בדרך')
    const [filterRoutes, setFilterRoutes] = useState('')
@@ -20,8 +20,13 @@ export const AppArrive = () => {
    }, [])
 
    useEffect(() => {
+      const routesFilterd = routes.filter(route => utilService.getTimeRemainingToArrive(route, siri))
+      if(!routesFilterd) {
+         setFilterRoutes(routes)
+         return setStatus('')
+      }
+
       if (status === 'בדרך') {
-         const routesFilterd = routes.filter(route => utilService.getTimeRemainingToArrive(route))
          setFilterRoutes(routesFilterd)
          console.log('filter', routesFilterd);
       } else {

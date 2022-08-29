@@ -1,5 +1,6 @@
 import { arriveService } from '../../services/arrive.service.js'
 import { routeService } from '../../services/route.service.js'
+import { siriService } from '../../services/siri.service.js'
 import { utilService } from '../../services/util.service'
 
 export function setArrive(arrive) {
@@ -19,6 +20,20 @@ export function loadArrives() {
       }
    } catch (err) {
       console.log('cannot load arrives', err)
+   }
+}
+
+export function loadSiri() {
+   try {
+      return async (dispatch) => {
+         const siri = await siriService.query()
+         console.log('Added Siri')
+         dispatch({ type: 'SET_SIRI', siri })
+         dispatch({ type: 'COUNT_CALLS' })
+         dispatch({ type: 'SET_SIRI_LAST_CALLS' })
+      }
+   } catch (err) {
+      console.log('cannot add siri', err)
    }
 }
 

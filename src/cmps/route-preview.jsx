@@ -1,47 +1,36 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { BsCircleFill } from 'react-icons/bs'
 import { CgArrowLongLeft } from 'react-icons/cg'
 import { MdOutlineHorizontalRule } from 'react-icons/md'
 import { AiOutlinePlusSquare } from 'react-icons/ai'
 
-import { utilService } from '../services/util.service'
-import { siriService } from '../services/siri.service'
-
 import { saveRoute } from '../store/arrive/arrive.action'
+import { utilService } from '../services/util.service'
 
 export const RoutePreview = ({ route, isInSearchList = false }) => {
 
    const dispatch = useDispatch()
+   const { siri } = useSelector(({ arriveModule }) => arriveModule)
 
-   const [siri, setSiri] = useState('')
    const [timeRemaining, setTimeRemaining] = useState('')
+   const [isAddedToList, setIsAddedToList] = useState(false)
 
    const intervalIdTime = useRef()
 
    useEffect(() => {
-      setSiri('')
-      loadSiri()
       startIntervral()
 
       return () => {
-         setSiri('')
          clearInterval(intervalIdTime.current)
       }
    }, [route])
 
-   const loadSiri = async () => {
-      setSiri('')
-      const data = await siriService.query({ stop: route.stop_code, train_no: route.train_no, route_id: route.route_id, direction: route.direction_id })
-      setSiri(data[0])
-      console.log('Called siri');
-   }
-
    const startIntervral = () => {
       setTimeDiff()
 
-      intervalIdTime.current = setInterval(() => {
+      intervalIdTime.current = setInterval(async () => {
          setTimeDiff()
       }, 60000);
    }
@@ -52,7 +41,8 @@ export const RoutePreview = ({ route, isInSearchList = false }) => {
    }
 
    const OnSubmit = () => {
-      updateRoute(route)
+      if (isInSearchList) updateRoute(route)
+      setIsAddedToList(true)
    }
 
    const updateRoute = async (route) => {
@@ -60,9 +50,8 @@ export const RoutePreview = ({ route, isInSearchList = false }) => {
       await dispatch(saveRoute(route))
    }
 
-
    return (
-      <div className="route-preview">
+      <div className="route-preview add" onClick={OnSubmit}>
          <div className="route-container">
             <div className="schedule-container">
                <div className="stop-name"><span> </span>{route.stop_name}</div>
@@ -94,10 +83,10 @@ export const RoutePreview = ({ route, isInSearchList = false }) => {
          <div className="real-time-container">
             {!timeRemaining && <div className="no-time-reamain"><span>שעת יציאה </span>{route.first_train.substring(0, 5)}</div>}
             {timeRemaining && <div className="time-reamain"><div className="blink_me"><BsCircleFill /></div>{timeRemaining}</div>}
-            {siri && /*!!utilService.getTimeDiff(route, siri) &&*/ <div className="siri">{`(${utilService.getTimeDiff(route, siri)}+)`}</div>}
+            {siri && utilService.getTimeDiff(route, siri) && <div className="siri">{`(${utilService.getTimeDiff(route, siri)?.totalDelay}+)`}</div>}
          </div>
 
-         { isInSearchList && <div className="btn-submit" onClick={OnSubmit}><AiOutlinePlusSquare /></div>}
+         {isInSearchList && isAddedToList && <div className="added"></div>}
 
       </div>
    )

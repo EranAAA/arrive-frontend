@@ -6,9 +6,11 @@ export const siriService = {
 
 async function query(data) {
    try {
-      return await httpService.get('trip/siri', data)
+      const siri = await httpService.get('trip/siri', data)
+      return siri
    } catch (err) {
-      console.log('cant get trips!')
+      console.log('cant get siri!', err)
       throw err
    }
 }
+// .Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit

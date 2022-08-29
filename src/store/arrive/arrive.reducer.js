@@ -3,7 +3,10 @@ const initialState = {
    routs: [],
    results: [],
    routes: [],
-   filter: {}
+   siri: [],
+   siriLastCall: '',
+   filter: {},
+   count: 0
 }
 
 export function arriveReducer(state = initialState, action) {
@@ -32,6 +35,18 @@ export function arriveReducer(state = initialState, action) {
 
       case 'UPDATE_ROUTE':
          newState = { ...state, routes: [...state.routes, action.route] }
+         break
+
+      case 'SET_SIRI':
+         newState = { ...state, siri: action.siri }
+         break
+
+      case 'COUNT_CALLS':
+         newState = { ...state, count: state.count + 1 }
+         break
+
+      case 'SET_SIRI_LAST_CALLS':
+         newState = { ...state, siriLastCall: Date.now() }
          break
 
       default:

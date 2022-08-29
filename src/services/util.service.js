@@ -156,14 +156,50 @@ function getTimeRemainingToArrive(route, siri) {
     const stop = getTimeInMs(route.arrival_time)
 
     if (now >= start && now <= stop && getIsInSchedule(route) && !siriData) {
+        // console.log('before arrive and no siri', (stop - now) / 1000);
         return (`${(stop - now) / 1000} דקות`)
     } else if (now >= start && now <= stop && getIsInSchedule(route) && siriData) {
-        return (`${(stop - now) / 1000 + siriData} דקות`)
+        // console.log('before arrive and with siri', (stop - now) / 1000 + (siriData.time - stop) / 1000);
+        return (`${(stop - now) / 1000 + (siriData.time - stop) / 1000} דקות`)
     } else if (siriData) {
-        return (`${siriData} דקות`)
+        const siriDataOnly = (siriData.time - now) / 1000
+        // console.log('siri Data Only', (siriData.time - now) / 1000);
+        if (siriDataOnly < 0) return 0
+        return (`${(siriData.time - now) / 1000} דקות`)
     } else {
+        // console.log('else', route.arrival_time);
         return ''
     }
+}
+
+function getTimeDiff(route, siri) {
+    if (!siri) return
+    let { train_no, route_id, direction_id, stop_code } = route
+    const directionRef = direction_id === '1' ? 2 : direction_id === '0' ? 1 : direction_id === '0' ? 3 : direction_id
+
+    const siriTrain = siri.find(stop =>
+        stop.LineRef == route_id &&
+        stop.PublishedLineName == train_no &&
+        stop.MonitoringRef == stop_code &&
+        stop.DirectionRef == (directionRef))
+
+    if (!siriTrain) return
+
+    let time = new Date(siriTrain.MonitoredCall.ExpectedArrivalTime)
+    time = time.toLocaleTimeString('HE-il', { hour: 'numeric', minute: 'numeric' })
+    time = getTimeInMs(time)
+
+    let arrival_time = getTimeInMs(route.arrival_time)
+
+    // console.log('************************************************');
+    // console.log('Train match from siri', siriTrain);
+    // console.log('Train match from search', route);
+    // console.log('************************************************');
+
+    const totalDelay = (time - arrival_time) / 1000
+    if (totalDelay === 'undefined') return
+
+    return { time, totalDelay }
 }
 
 function getdays(days, day) {
@@ -177,25 +213,6 @@ function getTripLong(route) {
     let end = getTimeInMs(route.arrival_time_a)
     if (((end - start) / 1000) < 0) return 0
     else return (end - start) / 1000
-}
-
-function getTimeDiff(route, siri) {
-    if (!siri?.MonitoredVehicleJourney?.MonitoredCall?.ExpectedArrivalTime) return
-    let { train_no, route_id, direction_id } = route
-    const directionRef = direction_id === '1' ? 2 : direction_id === '0' ? 1 : direction_id === '0' ? 3 : direction_id
-
-    let time = new Date(siri.MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime)
-    time = time.toLocaleTimeString('HE-il', { hour: 'numeric', minute: 'numeric' })
-    time = getTimeInMs(time)
-
-    if (siri.MonitoredVehicleJourney.LineRef == route_id &&
-        siri.MonitoredVehicleJourney.PublishedLineName == train_no &&
-        siri.MonitoredVehicleJourney.DirectionRef == (directionRef)) {
-
-        let arrival_time = getTimeInMs(route.arrival_time)
-        return (time - arrival_time) / 1000
-    }
-
 }
 
 function getTime(date) {
