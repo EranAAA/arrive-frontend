@@ -1,6 +1,6 @@
-# Bshvil-frontend - (on working projects) 
+# Arrive-frontend - (on working projects) 
 
-Arrive - (on working projects) - https://app-arrive.herokuapp.com/
+https://app-arrive.herokuapp.com/
 
 The app idea is to provide a comfortable way to track my train and let the user know if the train is on time or expected to
 be late. The idea came from my own experience running to the platform and finding that the train was late. 
